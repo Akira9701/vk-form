@@ -1,0 +1,117 @@
+.form_container{
+    width: 600px;
+    height: 600px;
+    @include border;
+
+    @include bg;
+    @include blockPadding;
+}
+
+.form_inputs-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.25em;
+    >div{
+        width: 30%;
+    }
+
+}
+
+.form_container-title{
+    color: white;
+    font-size: 1.25em;
+    margin-bottom: 1.25em;
+
+}
+
+.form_title-item{
+    color: white;
+    font-size: 1em;
+    margin-bottom: 0.75em;
+}
+
+.form_select-form-block{
+    .form_select-form-block_item-form{
+        width: 100%;
+    }
+    .form_select-form-block_select{
+        @include bg;
+
+        @include border;
+        color: white;
+        
+        >div{
+            @include blockPadding;
+            
+
+        }
+        >ul{
+            @include bg;
+            color: white;
+        }
+        
+    }
+    .form_select-form-block_select:hover{
+        color: white;
+        @include bg;
+
+    }
+    svg{
+        color: white;
+    }
+}
+
+.form_datepicker-block{
+    width: 40%;
+    // background: red;
+    >div{
+        @include border;
+        margin: 0;
+        padding: 0;
+    }
+    input{
+        color: white;
+        @include font;
+    }
+    svg{
+        color: white;
+    }
+}
+
+.form_time-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25em;
+
+    > p{
+        color: white;
+    }
+    .form_select-form-block{
+        width: 40%;
+    }
+}
+
+
+.form_textarea-block{
+    width: 100%;
+    >div{
+        @include font;
+        @include border;
+        @include bg;
+        color: white;
+
+
+    }
+    >div:hover{
+        color: white;
+    }
+}
+
+.form_message-container{
+    .form_textarea-block{
+        >div:hover{
+            color: white;
+        }
+    }
+}
