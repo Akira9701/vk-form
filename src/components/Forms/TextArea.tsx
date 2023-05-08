@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Textarea from '@mui/joy/Textarea';
 
 interface TexAreaInterface {
   setParametrs(type: string, value: number | string): void;
   title: string;
   typeData: string;
+  valueData: string;
 }
 
 const TextArea: React.FC<TexAreaInterface> = ({
   setParametrs,
   title,
   typeData,
+  valueData,
 }) => {
   return (
-    <div className="form_textarea-block">
-      <p className="form_title-item">{title}</p>
+    <div className="textarea-block">
+      <p className="title-item">{title}</p>
       <Textarea
         variant="plain"
         minRows={2}
@@ -22,8 +24,8 @@ const TextArea: React.FC<TexAreaInterface> = ({
         size="md"
         // variant="plain"
         color="neutral"
+        value={valueData}
         onChange={(event) => {
-          console.log(event.target.value);
           setParametrs(typeData, event.target.value as string);
         }}
       />

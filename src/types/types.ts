@@ -1,24 +1,31 @@
-import { Interests } from '@mui/icons-material';
-
 export interface Towers {
-  A: {
-    [key: number]: {
-      rooms: number[];
-    };
-  };
-  B: {
-    [key: number]: {
-      rooms: number[];
+  [key: string]: {
+    floor: {
+      [key: string]: {
+        room: {
+          [key: string]: {
+            month: {
+              [key: string]: {
+                day: {
+                  [key: string]: {
+                    time: string[];
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
     };
   };
 }
 
 export interface Data {
   tower: string;
-  floor: number;
+  floor: string;
   room: string;
-  month: number;
-  day: number;
+  month: string;
+  day: string;
   time: string;
   message: string;
 }

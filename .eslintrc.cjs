@@ -21,15 +21,17 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    indent: 'error',
-    'prettier/prettier': [
-      2,
-      {
-        // useTabs: false,
-        endOfLine: 'auto',
-      },
-    ],
+    indent: ['error', 2],
+    // 'prettier/prettier': [
+    //   2,
+    //   {
+    //     // useTabs: false,
+    //     endOfLine: 'auto',
+    //     printWidth: 120,
+    //   },
+    // ],
     'no-nested-ternary': 'off',
+    'react/require-default-props': 'off',
     'react/function-component-definition': [
       2,
       {
@@ -37,5 +39,13 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    // 'prettier/prettier': 'error',
+    'no-unused-vars': 'warn',
+    'no-console': 'off',
+    'func-names': 'off',
+    'no-process-exit': 'off',
+    'object-shorthand': 'off',
+    'class-methods-use-this': 'off',
+    'prettier/prettier': 'error',
   },
 };

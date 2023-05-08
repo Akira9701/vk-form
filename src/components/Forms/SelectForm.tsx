@@ -1,59 +1,57 @@
-import React, { Component, useState } from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-// import Select, { SelectChangeEvent } from '@mui/material/Select';
+import React, { forwardRef, useEffect } from 'react';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
-
-import { Towers } from '../../types/types';
 
 interface SelectFormInterface {
   name: string;
   data: string[] | number[];
   typeData: string;
-  setParametrs: any;
+  setParametrs(type: string, value: number | string): void;
+  valueData: string;
 }
-const SelectForm: React.FC<SelectFormInterface> = ({
-  name,
-  data,
-  typeData,
-  setParametrs,
-}) => {
-  const [val, setVal] = useState('');
-
-  return (
-    <div className="form_select-form-block">
-      <p className="form_title-item">{name}</p>
-      <div>
-        <FormControl className="form_select-form-block_item-form">
+const SelectForm = forwardRef<HTMLButtonElement, SelectFormInterface>(
+  ({ name, data, typeData, setParametrs, valueData }, ref) => {
+    useEffect(() => {
+      console.log(`rerender ${name}`);
+    });
+    return (
+      <div className="select-form-block">
+        <p className="title-item">{name}</p>
+        <div className="select-form-block_item-form">
           <Select
-            className="form_select-form-block_select"
+            placeholder="-"
+            className="select-form-block_select"
             onChange={(
               event: React.SyntheticEvent | null,
               value: string | null
             ) => {
-              console.log(value);
-              setParametrs(typeData, value as string);
-              setVal(value as string);
+              setParametrs(
+                typeData,
+                (value === null ? '' : value) as string | number
+              );
             }}
             variant="soft"
+            value={valueData === null ? '' : valueData}
+            ref={ref}
           >
-            {/* <MenuItem value="">
+            <Option value="">
               <em>-</em>
-            </MenuItem> */}
+            </Option>
             {data.map((el) => (
-              <Option key={el} value={el}>
-                <em>{el}</em>
+              <Option key={el} value={String(el)}>
+                {el}
               </Option>
             ))}
             {/* <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem> */}
           </Select>
-        </FormControl>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
+
+SelectForm.displayName = 'Select Component';
 
 export default SelectForm;

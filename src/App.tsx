@@ -1,13 +1,8 @@
 import React from 'react';
 import FormsComponent from './components/FormsComponent';
 
-const App = () => {
-  return (
-    <section className="form_container">
-      <p className="form_container-title">Забронировать переговорную</p>
-      <FormsComponent />
-    </section>
-  );
+const App: React.FC = () => {
+  return <FormsComponent />;
 };
 
 export default App;
