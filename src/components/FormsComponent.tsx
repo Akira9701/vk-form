@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import CircularProgress from '@mui/joy/CircularProgress';
-import SelectForm from './Forms/SelectForm';
+import SelectForm from './Inputs/SelectForm';
 import towersFunc from '../data/data';
-import { Data, Towers } from '../types/types';
-import DatePickerComponent from './Forms/DatePicker';
-import TextArea from './Forms/TextArea';
+import {Data, Towers} from '../types/types';
+import DatePickerComponent from './Inputs/DatePicker';
+import TextArea from './Inputs/TextArea';
 import ButtonComponent from './Button';
 import validate from '../utils/validate';
 
@@ -22,7 +22,7 @@ const FormsContainer = () => {
   });
 
   const dropForm = () => {
-    setState((prevState) => ({
+    setState(prevState => ({
       ...prevState,
       tower: '',
       floor: '',
@@ -63,16 +63,13 @@ const FormsContainer = () => {
       }
     }
     if (flag) {
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/posts',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-          body: JSON.stringify(state),
-        }
-      );
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(state),
+      });
       if (response.ok) return 'ok';
       return 'bad';
     }
@@ -81,7 +78,7 @@ const FormsContainer = () => {
 
   const setParametrs = (item: string, value: string | number) => {
     console.log(item, value);
-    setState((prevState: Data) => ({ ...prevState, [item]: value }));
+    setState((prevState: Data) => ({...prevState, [item]: value}));
   };
 
   useEffect(() => {
@@ -110,11 +107,7 @@ const FormsContainer = () => {
             <SelectForm
               name="Этажи"
               typeData="floor"
-              data={
-                state.tower in towers
-                  ? Object?.keys(towers?.[state.tower as keyof Towers].floor)
-                  : []
-              }
+              data={state.tower in towers ? Object?.keys(towers?.[state.tower as keyof Towers].floor) : []}
               valueData={String(state.floor)}
               setParametrs={setParametrs}
               ref={FloorSelect}
@@ -123,14 +116,8 @@ const FormsContainer = () => {
               name="Номер комнаты"
               typeData="room"
               data={
-                state.tower in towers &&
-                  Object.keys(
-                    towers?.[state.tower as keyof Towers].floor
-                  ).includes(state.floor)
-                  ? Object?.keys(
-                    towers?.[state.tower as keyof Towers]?.floor[state.floor]
-                      .room
-                  )
+                state.tower in towers && Object.keys(towers?.[state.tower as keyof Towers].floor).includes(state.floor)
+                  ? Object?.keys(towers?.[state.tower as keyof Towers]?.floor[state.floor].room)
                   : []
               }
               setParametrs={setParametrs}
@@ -139,46 +126,34 @@ const FormsContainer = () => {
             />
           </div>
           <div className="form_time-container">
-            <DatePickerComponent
-              setParametrs={setParametrs}
-              valueDay={state.day}
-              valueMonth={state.month}
-            />
+            <DatePickerComponent setParametrs={setParametrs} valueDay={state.day} valueMonth={state.month} />
 
             {(state.tower !== '', state.floor !== '', state.room !== '') &&
-              towers?.[state.tower as keyof Towers]?.floor?.[state.floor]?.room?.[
-                state.room
-              ]?.month[state.month]?.day !== undefined &&
-              state.day in
-              towers[state.tower as keyof Towers].floor[state.floor].room[
-                state.room
-              ].month[state.month].day &&
-              towers?.[state.tower as keyof Towers]?.floor[state.floor].room[
-                state.room
-              ].month[state.month as keyof Towers].day[state.day as keyof Towers]
-                .time.length !== 0 ? (
-              <SelectForm
-                name="Время"
-                typeData="time"
-                data={
-                  towers?.[state.tower as keyof Towers]?.floor[state.floor]
-                    .room[state.room].month[state.month].day[state.day].time
-                }
-                setParametrs={setParametrs}
-                valueData={state.time}
-                ref={TimeSelect}
-              />
-            ) : (
-              <p>В данный день нет свобоного времени</p>
-            )}
+            towers?.[state.tower as keyof Towers]?.floor?.[state.floor]?.room?.[state.room]?.month[state.month]?.day !==
+              undefined &&
+            state.day in
+              towers[state.tower as keyof Towers].floor[state.floor].room[state.room].month[state.month].day &&
+            towers?.[state.tower as keyof Towers]?.floor[state.floor].room[state.room].month[
+              state.month as keyof Towers
+            ].day[state.day as keyof Towers].time.length !== 0 ? (
+                <SelectForm
+                  name="Время"
+                  typeData="time"
+                  data={
+                    towers?.[state.tower as keyof Towers]?.floor[state.floor].room[state.room].month[state.month].day[
+                      state.day
+                    ].time
+                  }
+                  setParametrs={setParametrs}
+                  valueData={state.time}
+                  ref={TimeSelect}
+                />
+              ) : (
+                <p>В данный день нет свобоного времени</p>
+              )}
           </div>
           <div className="form_message-container">
-            <TextArea
-              title="Комментарий"
-              setParametrs={setParametrs}
-              typeData="message"
-              valueData={state.message}
-            />
+            <TextArea title="Комментарий" setParametrs={setParametrs} typeData="message" valueData={state.message} />
           </div>
           <div className="form_btn-container">
             <ButtonComponent action={dropForm} title="Очистить" />
@@ -186,11 +161,7 @@ const FormsContainer = () => {
           </div>
         </div>
       ) : (
-        <CircularProgress
-          variant="solid"
-          color="neutral"
-          sx={{ m: '0 auto' }}
-        />
+        <CircularProgress variant="solid" color="neutral" sx={{m: '0 auto'}} />
       )}
     </section>
   );

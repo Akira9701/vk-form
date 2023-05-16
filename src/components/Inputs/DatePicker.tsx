@@ -3,10 +3,10 @@ import dayjs from 'dayjs';
 // eslint-disable-next-line import/extensions
 import ru from 'dayjs/locale/ru.js';
 
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 
 import 'dayjs/locale/de';
 
@@ -16,11 +16,7 @@ interface DatePickerInterface {
   valueMonth: string;
 }
 
-const DatePickerComponent: React.FC<DatePickerInterface> = ({
-  setParametrs,
-  valueDay,
-  valueMonth,
-}) => {
+const DatePickerComponent: React.FC<DatePickerInterface> = ({setParametrs, valueDay, valueMonth}) => {
   return (
     <div className="datepicker-block">
       <p className="title-item">Дата</p>
@@ -29,10 +25,8 @@ const DatePickerComponent: React.FC<DatePickerInterface> = ({
           <DatePicker
             // label="Controlled"
             // localeText={ruRU}
-            value={dayjs(
-              `${new Date().getFullYear()}-${valueMonth}-${valueDay}`
-            )}
-            onChange={(newValue) => {
+            value={dayjs(`${new Date().getFullYear()}-${valueMonth}-${valueDay}`)}
+            onChange={newValue => {
               if (newValue !== null) {
                 setParametrs('month', String(newValue.month() + 1));
                 setParametrs('day', String(newValue.date()));

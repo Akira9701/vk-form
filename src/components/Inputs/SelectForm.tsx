@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, {forwardRef, useEffect} from 'react';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 
@@ -10,7 +10,7 @@ interface SelectFormInterface {
   valueData: string;
 }
 const SelectForm = forwardRef<HTMLButtonElement, SelectFormInterface>(
-  ({ name, data, typeData, setParametrs, valueData }, ref) => {
+  ({name, data, typeData, setParametrs, valueData}, ref) => {
     useEffect(() => {
       console.log(`rerender ${name}`);
     });
@@ -21,14 +21,8 @@ const SelectForm = forwardRef<HTMLButtonElement, SelectFormInterface>(
           <Select
             placeholder="-"
             className="select-form-block_select"
-            onChange={(
-              event: React.SyntheticEvent | null,
-              value: string | null
-            ) => {
-              setParametrs(
-                typeData,
-                (value === null ? '' : value) as string | number
-              );
+            onChange={(event: React.SyntheticEvent | null, value: string | null) => {
+              setParametrs(typeData, (value === null ? '' : value) as string | number);
             }}
             variant="soft"
             value={valueData === null ? '' : valueData}
@@ -37,7 +31,7 @@ const SelectForm = forwardRef<HTMLButtonElement, SelectFormInterface>(
             <Option value="">
               <em>-</em>
             </Option>
-            {data.map((el) => (
+            {data.map(el => (
               <Option key={el} value={String(el)}>
                 {el}
               </Option>

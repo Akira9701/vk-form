@@ -8,12 +8,7 @@ interface TexAreaInterface {
   valueData: string;
 }
 
-const TextArea: React.FC<TexAreaInterface> = ({
-  setParametrs,
-  title,
-  typeData,
-  valueData,
-}) => {
+const TextArea: React.FC<TexAreaInterface> = ({setParametrs, title, typeData, valueData}) => {
   return (
     <div className="textarea-block">
       <p className="title-item">{title}</p>
@@ -25,7 +20,7 @@ const TextArea: React.FC<TexAreaInterface> = ({
         // variant="plain"
         color="neutral"
         value={valueData}
-        onChange={(event) => {
+        onChange={event => {
           setParametrs(typeData, event.target.value as string);
         }}
       />
